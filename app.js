@@ -3,7 +3,8 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 
 const pageRoute = require('./routes/pageRoute');
-const CourseRoute = require('./routes/courseRoute');
+const courseRoute = require('./routes/courseRoute');
+const categoryRoute = require('./routes/categoryRoute');
 const app = express();
 const port = 3000;
 
@@ -23,7 +24,8 @@ app.use(express.static("public"));
 
 //Routes
 app.use('/', pageRoute);
-app.use('/courses', CourseRoute);
+app.use('/courses', courseRoute);
+app.use('/categories', categoryRoute);
 
 
 
