@@ -22,11 +22,14 @@ exports.createUser = async (req,res) => {
 
 exports.loginUser = async (req,res) => {
     try {
-        const {email, password} = req.body;
+        const {email,password} = req.body;
         
         const user=await User.findOne({email});
+
             if(user) {
+                
                 bcrypt.compare(password,user.password,(err,same) => {
+                    
                     if(same) {
                          req.session.user = user._id;
                         
@@ -35,8 +38,12 @@ exports.loginUser = async (req,res) => {
                     }
                     else {
                         res.status(400).redirect('/login');
+                        console.log("kullanıcı adı ve şifre hatalı")
                     }
                 })
+            }
+            else {
+                res.send("böyle bir kullanıcı yok");
             }
         
     }
